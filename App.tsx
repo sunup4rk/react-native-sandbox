@@ -7,8 +7,8 @@
 
 import React from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import Main from './src/screen/Main';
-import colors from './src/config/colors';
+import Main from './src/screens/Main';
+import colors from './src/configs/colors';
 
 function App(): React.JSX.Element {
   return (

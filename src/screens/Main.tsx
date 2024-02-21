@@ -1,6 +1,6 @@
 import React from 'react';
 import {StyleSheet, SafeAreaView, Text} from 'react-native';
-import Header from '../component/header/Header';
+import Header from '../components/header/Header';
 
 const Main = () => {
   return (
