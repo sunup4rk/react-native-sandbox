@@ -7,11 +7,12 @@
 
 import React from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import Main from './src/component/screen/Main';
+import Main from './src/screen/Main';
+import colors from './src/config/colors';
 
 function App(): React.JSX.Element {
   return (
-    <GestureHandlerRootView style={{flex: 1}}>
+    <GestureHandlerRootView style={{flex: 1, backgroundColor: colors.primary}}>
       <Main />
     </GestureHandlerRootView>
   );

@@ -1,10 +1,11 @@
 import React from 'react';
 import {StyleSheet, SafeAreaView, Text} from 'react-native';
+import Header from '../component/header/Header';
 
 const Main = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Text>Main</Text>
+      <Header title="Main" />
     </SafeAreaView>
   );
 };
