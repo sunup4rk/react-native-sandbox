@@ -5,12 +5,13 @@ import { Fonts } from "../../configs/fonts";
 export const styles = StyleSheet.create({
   container: {
     backgroundColor: colors.primary,
+    height: 60,
     alignItems: 'center',
-    justifyContent: 'center'
+    justifyContent: 'center',
   }, 
   text: {
-    fontFamily: Fonts.SpoqaHanSansNeo.Bold,
-    fontSize: 20,
-    color: '#333'
+    fontFamily: Fonts.SpoqaHanSansNeo.Medium,
+    fontSize: 22,
+    color: colors.text,
   }
 })
