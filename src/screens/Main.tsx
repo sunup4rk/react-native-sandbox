@@ -5,7 +5,7 @@ import Header from '../components/header/Header';
 const Main = () => {
   return (
     <SafeAreaView style={styles.container}>
-      <Header title="Main" />
+      <Header title="스포카 한 산스 네오" />
     </SafeAreaView>
   );
 };

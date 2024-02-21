@@ -48,5 +48,18 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	<key>UIAppFonts</key>
+	<array>
+    <string>SpoqaHanSansNeo-Bold.ttf</string>
+    <string>SpoqaHanSansNeo-Light.ttf</string>
+    <string>SpoqaHanSansNeo-Medium.ttf</string>
+    <string>SpoqaHanSansNeo-Regular.ttf</string>
+    <string>SpoqaHanSansNeo-Thin.ttf</string>
+		<string>MaruBuri-Bold.ttf</string>
+    <string>MaruBuri-ExtraLight.ttf</string>
+    <string>MaruBuri-Light.ttf</string>
+    <string>MaruBuri-Regular.ttf</string>
+    <string>MaruBuri-SemiBold.ttf</string>
+	</array>
 </dict>
 </plist>
