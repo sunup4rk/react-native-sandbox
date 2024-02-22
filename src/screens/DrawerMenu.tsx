@@ -1,5 +1,6 @@
 import React, {FC} from 'react';
 import {StyleSheet, Text, SafeAreaView} from 'react-native';
+import colors from '../configs/colors';
 
 export interface DrawerMenuProps {}
 
@@ -12,7 +13,10 @@ const DrawerMenu: FC<DrawerMenuProps> = () => {
 };
 
 const styles = StyleSheet.create({
-  container: {},
+  container: {
+    flex: 1,
+    backgroundColor: colors.primaryDark,
+  },
 });
 
 export default DrawerMenu;
