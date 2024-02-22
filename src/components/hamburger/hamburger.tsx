@@ -1,95 +1,59 @@
-import React from 'react';
-import {TouchableOpacity} from 'react-native';
-import {
-  BAR_TRANSLATE,
-  HAMBURGER_BAR_INTERPOLATE,
-  hamburgerStyles as styles,
-} from './styles';
-import Bar from './bar';
-import {
+import React, {FC} from 'react';
+import {TouchableOpacity, ViewStyle} from 'react-native';
+import Animated, {
+  AnimatedStyle,
   interpolate,
   useDerivedValue,
   useSharedValue,
   useAnimatedStyle,
   withTiming,
+  SharedValue,
 } from 'react-native-reanimated';
+import colors from '../../configs/colors';
 
-const Hamburger = () => {
+export interface HamburgerProps {
+  size?: number;
+}
+
+export interface BarProps {
+  barStyles: ViewStyle;
+  animatedStyles: AnimatedStyle;
+}
+
+const Hamburger: FC<HamburgerProps> = ({size = 24}) => {
+  const {
+    HEIGHT,
+    WIDTH,
+    PADDING_VERTICAL,
+    PADDING_HORIZONTAL,
+    BAR_HEIGHT,
+    BAR_WIDTH,
+    BAR_TRANSLATE_Y,
+  } = getStyleConstants(size);
+
   const animatedValue = useSharedValue(0);
 
-  const getInterpolatedValue = (
-    outputRangeMin: number,
-    outputRangeMax: number,
-  ) => {
-    return useDerivedValue(() => {
-      return interpolate(
-        animatedValue.value,
-        [0, 1],
-        [outputRangeMin, outputRangeMax],
-      );
-    });
-  };
-
-  const getInterPolatedRotateValue = (
-    outputRangeMin: number,
-    outputRangeMax: number,
-  ) => {
-    return useDerivedValue(() => {
-      const interpolatedValue = Math.round(
-        interpolate(
-          animatedValue.value,
-          [0, 1],
-          [outputRangeMin, outputRangeMax],
-        ),
-      );
-      return `${interpolatedValue}deg`;
-    });
-  };
-
-  const opacity2 = getInterpolatedValue(1, 0);
-
-  const rotate1 = getInterPolatedRotateValue(0, 45);
-  const rotate2 = getInterPolatedRotateValue(0, -45);
-
-  const translateX1 = getInterpolatedValue(
-    0,
-    BAR_TRANSLATE - HAMBURGER_BAR_INTERPOLATE,
-  );
-  const translateY1 = getInterpolatedValue(
-    0,
-    BAR_TRANSLATE - HAMBURGER_BAR_INTERPOLATE,
-  );
-  const translateX3 = getInterpolatedValue(
-    0,
-    BAR_TRANSLATE - HAMBURGER_BAR_INTERPOLATE,
-  );
-  const translateY3 = getInterpolatedValue(
-    0,
-    -BAR_TRANSLATE + HAMBURGER_BAR_INTERPOLATE,
-  );
+  const opacity = getInterpolatedValue(animatedValue, 1, 0);
+  const translateY = getInterpolatedValue(animatedValue, 0, BAR_TRANSLATE_Y);
+  const rotate1 = getInterPolatedRotateValue(animatedValue, 0, 45);
+  const rotate2 = getInterPolatedRotateValue(animatedValue, 0, -45);
 
   const animatedStyle1 = useAnimatedStyle(() => {
     return {
-      transform: [
-        {rotate: rotate1.value},
-        {translateX: translateX1.value},
-        {translateY: translateY1.value},
-      ],
+      transform: [{translateY: translateY.value}, {rotate: rotate1.value}],
     };
   });
+
   const animatedStyle2 = useAnimatedStyle(() => {
     return {
-      opacity: opacity2.value,
+      opacity: opacity.value,
       transform: [{rotate: rotate2.value}],
     };
   });
+
   const animatedStyle3 = useAnimatedStyle(() => {
     return {
-      transform: [
-        {rotate: rotate2.value},
-        {translateX: translateX3.value},
-        {translateY: translateY3.value},
-      ],
+      transform: [{translateY: -translateY.value}, {rotate: rotate2.value}],
     };
   });
 
@@ -98,13 +62,83 @@ const Hamburger = () => {
     animatedValue.value = withTiming(toValue, {duration: 300});
   };
 
+  const Bar: FC<BarProps> = ({animatedStyles, barStyles}) => (
+    <Animated.View style={[animatedStyles, barStyles]} />
+  );
+
+  const styles: ViewStyle = {
+    height: HEIGHT,
+    width: WIDTH,
+    justifyContent: 'space-between',
+    paddingVertical: PADDING_VERTICAL,
+    paddingHorizontal: PADDING_HORIZONTAL,
+  };
+
+  const barStyles: ViewStyle = {
+    width: BAR_WIDTH,
+    height: BAR_HEIGHT,
+    backgroundColor: colors.text,
+  };
+
   return (
-    <TouchableOpacity style={styles.container} onPress={onPress}>
-      <Bar animatedStyles={animatedStyle1} />
-      <Bar animatedStyles={animatedStyle2} />
-      <Bar animatedStyles={animatedStyle3} />
+    <TouchableOpacity style={styles} onPress={onPress}>
+      <Bar animatedStyles={animatedStyle1} barStyles={barStyles} />
+      <Bar animatedStyles={animatedStyle2} barStyles={barStyles} />
+      <Bar animatedStyles={animatedStyle3} barStyles={barStyles} />
     </TouchableOpacity>
   );
+};
+
+const getStyleConstants = (size: number) => {
+  const HEIGHT = size;
+  const WIDTH = HEIGHT;
+  const PADDING_VERTICAL = HEIGHT / 4;
+  const PADDING_HORIZONTAL = HEIGHT / 8;
+  const BAR_HEIGHT = HEIGHT / 12;
+  const BAR_WIDTH = WIDTH - PADDING_HORIZONTAL * 2;
+  const BAR_SPACE = (HEIGHT - PADDING_VERTICAL * 2 - BAR_HEIGHT * 3) / 2;
+  const BAR_TRANSLATE_Y = BAR_SPACE + BAR_HEIGHT;
+
+  return {
+    HEIGHT,
+    WIDTH,
+    PADDING_VERTICAL,
+    PADDING_HORIZONTAL,
+    BAR_HEIGHT,
+    BAR_WIDTH,
+    BAR_TRANSLATE_Y,
+  };
+};
+
+const getInterpolatedValue = (
+  animatedValue: SharedValue<number>,
+  outputRangeMin: number,
+  outputRangeMax: number,
+) => {
+  return useDerivedValue(() => {
+    return interpolate(
+      animatedValue.value,
+      [0, 1],
+      [outputRangeMin, outputRangeMax],
+    );
+  });
+};
+
+const getInterPolatedRotateValue = (
+  animatedValue: SharedValue<number>,
+  outputRangeMin: number,
+  outputRangeMax: number,
+) => {
+  return useDerivedValue(() => {
+    const interpolatedValue = Math.round(
+      interpolate(
+        animatedValue.value,
+        [0, 1],
+        [outputRangeMin, outputRangeMax],
+      ),
+    );
+    return `${interpolatedValue}deg`;
+  });
 };
 
 export default Hamburger;

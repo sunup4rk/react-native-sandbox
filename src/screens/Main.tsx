@@ -9,7 +9,7 @@ const Main = () => {
     <SafeAreaView style={styles.container}>
       <Header title="스포카 한 산스 네오" />
       <View style={{flex: 1, backgroundColor: colors.silver}}>
-        <Hamburger />
+        <Hamburger size={100} />
       </View>
     </SafeAreaView>
   );
