@@ -7,13 +7,18 @@
 
 import React from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
-import Main from './src/screens/Main';
-import colors from './src/configs/colors';
+import {SafeAreaProvider} from 'react-native-safe-area-context';
+import {NavigationContainer} from '@react-navigation/native';
+import RootStackNavigator from './src/navigators/RootStackNavigator';
 
 function App(): React.JSX.Element {
   return (
-    <GestureHandlerRootView style={{flex: 1, backgroundColor: colors.primary}}>
-      <Main />
+    <GestureHandlerRootView style={{flex: 1, backgroundColor: 'royalblue'}}>
+      <SafeAreaProvider>
+        <NavigationContainer>
+          <RootStackNavigator />
+        </NavigationContainer>
+      </SafeAreaProvider>
     </GestureHandlerRootView>
   );
 }
