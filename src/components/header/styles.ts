@@ -7,11 +7,13 @@ export const styles = StyleSheet.create({
     backgroundColor: colors.primary,
     height: 60,
     alignItems: 'center',
-    justifyContent: 'center',
+    flexDirection: 'row',
+    paddingHorizontal: 16,
   }, 
   text: {
     fontFamily: Fonts.SpoqaHanSansNeo.Medium,
     fontSize: 22,
     color: colors.text,
+    marginLeft: 24
   }
 })

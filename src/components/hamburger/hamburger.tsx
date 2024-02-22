@@ -12,7 +12,9 @@ import Animated, {
 import colors from '../../configs/colors';
 
 export interface HamburgerProps {
+  animation?: boolean;
   size?: number;
+  onPressButton(): void;
 }
 
 export interface BarProps {
@@ -20,7 +22,11 @@ export interface BarProps {
   animatedStyles: AnimatedStyle;
 }
 
-const Hamburger: FC<HamburgerProps> = ({size = 24}) => {
+const Hamburger: FC<HamburgerProps> = ({
+  animation = false,
+  size = 24,
+  onPressButton,
+}) => {
   const {
     HEIGHT,
     WIDTH,
@@ -58,8 +64,11 @@ const Hamburger: FC<HamburgerProps> = ({size = 24}) => {
   });
 
   const onPress = () => {
-    const toValue = animatedValue.value === 0 ? 1 : 0;
-    animatedValue.value = withTiming(toValue, {duration: 300});
+    if (animation) {
+      const toValue = animatedValue.value === 0 ? 1 : 0;
+      animatedValue.value = withTiming(toValue, {duration: 300});
+    }
+    onPressButton();
   };
 
   const Bar: FC<BarProps> = ({animatedStyles, barStyles}) => (
