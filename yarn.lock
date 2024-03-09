@@ -5635,6 +5635,11 @@ react-native-gesture-handler@^2.15.0:
     lodash "^4.17.21"
     prop-types "^15.7.2"
 
+react-native-infinite-pager@^0.3.13:
+  version "0.3.13"
+  resolved "https://registry.yarnpkg.com/react-native-infinite-pager/-/react-native-infinite-pager-0.3.13.tgz#3d96d8a53b84df72af83de372e1414e7c00d79a6"
+  integrity sha512-F9o7GlHp79UQf9Nl9bMrdTN/eq9YpSESciypTMuk664vrB2HyaLdhHwAd596riHu3OE2KdmgoeLMIqNychZRqw==
+
 react-native-reanimated@^3.7.1:
   version "3.7.1"
   resolved "https://registry.yarnpkg.com/react-native-reanimated/-/react-native-reanimated-3.7.1.tgz#b0948b67343fcb16196cd3c07e5fd888c0bbd1af"
