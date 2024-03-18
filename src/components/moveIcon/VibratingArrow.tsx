@@ -20,10 +20,10 @@ const VibratingArrow: FC<VibratingArrowProps> = () => {
   useEffect(() => {
     animatedValue.value = withRepeat(
       withSequence(
-        withTiming(8, {duration: 150}), // 위로 이동
-        withTiming(-8, {duration: 150}), // 아래로 이동
-        withTiming(8, {duration: 150}), // 위로 이동
-        withTiming(-8, {duration: 150}), // 아래로 이동
+        withTiming(5, {duration: 150}), // 위로 이동
+        withTiming(-5, {duration: 150}), // 아래로 이동
+        withTiming(5, {duration: 150}), // 위로 이동
+        withTiming(-5, {duration: 150}), // 아래로 이동
         withTiming(0, {duration: 150}), // 원래 위치로
         withTiming(0, {duration: 3000}), // 대기시간
       ),
