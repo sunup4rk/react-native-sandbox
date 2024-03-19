@@ -1,5 +1,5 @@
 import React, {FC, useEffect, useRef} from 'react';
-import {StyleSheet, View} from 'react-native';
+import {Pressable, StyleSheet, View} from 'react-native';
 import Animated, {
   useAnimatedStyle,
   useDerivedValue,
@@ -10,9 +10,11 @@ import Animated, {
 } from 'react-native-reanimated';
 import colors from '../../configs/colors';
 
-export interface VibratingArrowProps {}
+export interface VibratingArrowProps {
+  onPress(): void;
+}
 
-const VibratingArrow: FC<VibratingArrowProps> = () => {
+const VibratingArrow: FC<VibratingArrowProps> = ({onPress}) => {
   // 공유 값으로 애니메이션 관리
   const animatedValue = useSharedValue(0);
 
@@ -37,7 +39,19 @@ const VibratingArrow: FC<VibratingArrowProps> = () => {
       transform: [{translateY: animatedValue.value}],
     };
   });
-  return <Animated.View style={[styles.container, animatedStyle]} />;
+  return (
+    <Animated.View style={[styles.container, animatedStyle]}>
+      <Pressable
+        onPress={onPress}
+        style={({pressed}) => [
+          {
+            width: 100,
+            height: 100,
+            transform: [{scale: pressed ? 0.96 : 1}],
+          },
+        ]}></Pressable>
+    </Animated.View>
+  );
 };
 
 const styles = StyleSheet.create({
