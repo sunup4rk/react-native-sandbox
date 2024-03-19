@@ -6,14 +6,15 @@ import {
   Pressable,
   TouchableOpacity,
   Vibration,
+  Text,
 } from 'react-native';
 import Header from '../components/header/Header';
 import colors from '../configs/colors';
 import {useNavigation, DrawerActions} from '@react-navigation/native';
 import {DrawerNavigation} from '../navigators/DrawerNavigator';
 import {RootStackNavigation} from '../navigators/RootStackNavigator';
-import Animated from 'react-native-reanimated';
 import VibratingArrow from '../components/moveIcon/VibratingArrow';
+import {Fonts} from '../configs/fonts';
 
 const Main = () => {
   const RootStackNavigator = useNavigation<RootStackNavigation>();
@@ -23,8 +24,17 @@ const Main = () => {
     drawerNavigation.dispatch(DrawerActions.openDrawer());
 
   const onPressButton1 = () => {
-    Vibration.vibrate();
-    RootStackNavigator.navigate('Note');
+    Vibration.vibrate(400);
+    // RootStackNavigator.navigate('Note');
+  };
+
+  const cancelVibration = () => {
+    Vibration.cancel();
+  };
+
+  const onPressVibratingButton = () => {
+    Vibration.vibrate([0, 1000, 2000, 3000]);
+    RootStackNavigator.navigate('WebViewPage');
   };
 
   return (
@@ -50,7 +60,31 @@ const Main = () => {
           />
         </Pressable>
 
-        <VibratingArrow />
+        <VibratingArrow onPress={onPressVibratingButton} />
+
+        <TouchableOpacity
+          style={{
+            height: 30,
+            width: 30,
+            borderRadius: 20,
+            backgroundColor: colors.subtext,
+          }}
+          onPress={cancelVibration}
+        />
+        <View>
+          <Text style={{fontFamily: Fonts.MaruBuri.Bold}}>1234</Text>
+          <Text style={{fontFamily: Fonts.MaruBuri.ExtraLight}}>1234</Text>
+          <Text style={{fontFamily: Fonts.MaruBuri.Light}}>1234</Text>
+          <Text style={{fontFamily: Fonts.MaruBuri.Regular}}>1234</Text>
+          <Text style={{fontFamily: Fonts.MaruBuri.SemiBold}}>1234</Text>
+        </View>
+        <View>
+          <Text style={{fontFamily: Fonts.SpoqaHanSansNeo.Bold}}>1234</Text>
+          <Text style={{fontFamily: Fonts.SpoqaHanSansNeo.Light}}>1234</Text>
+          <Text style={{fontFamily: Fonts.SpoqaHanSansNeo.Medium}}>1234</Text>
+          <Text style={{fontFamily: Fonts.SpoqaHanSansNeo.Regular}}>1234</Text>
+          <Text style={{fontFamily: Fonts.SpoqaHanSansNeo.Thin}}>1234</Text>
+        </View>
       </View>
     </SafeAreaView>
   );
