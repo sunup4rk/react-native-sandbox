@@ -1,4 +1,4 @@
-package com.reactnativesandbox
+package com.sunudev.rnExample
 
 import android.app.Application
 import com.facebook.react.PackageList

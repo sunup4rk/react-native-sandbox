@@ -1,4 +1,4 @@
-package com.reactnativesandbox
+package com.sunudev.rnExample
 
 import com.facebook.react.ReactActivity
 import com.facebook.react.ReactActivityDelegate
